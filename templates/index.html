@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flask Python Web Scrapping</title>
+        <link rel="stylesheet" href="/static/style.css"> 
+    </head>
+    <body>
+        <h1>Headline Berita Terkini</h1>
+        <div class="news">
+            <div class="news-column">
+                <div class="news-item">
+                    <label>CNN:</label>
+                    <p>{{ news1 }}</p>
+                </div>
+                <div class="news-item">
+                    <label>Detik:</label>
+                    <p>{{ news2 }}</p>
+                </div>
+                <div class="news-item">
+                    <label>Okezone:</label>
+                    <p>{{ news3 }}</p>
+                </div>
+            </div>
+            <div class="news-column">
+                <div class="news-item">
+                    <label>Kompas:</label>
+                    <p>{{ news4}}</p>
+                </div>
+                <div class="news-item">
+                    <label>Tempo:</label>
+                    <p>{{ news5 }}</p>
+                </div>
+                <div class="news-item">
+                    <label>Liputan6:</label>
+                    <p>{{ news6 }}</p>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="footer">
+            <hr>
+            <h1>Produk Top dari Beberapa Website</h1>
+        </div>
+        -->
+    </body>
+</html>
