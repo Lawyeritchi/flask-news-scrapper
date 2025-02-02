@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -38,11 +38,50 @@
                 </div>
             </div>
         </div>
-        <!--
         <div class="footer">
             <hr>
             <h1>Produk Top dari Beberapa Website</h1>
         </div>
-        -->
+    </body>
+</html> 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flask Python Web Scraping</title>
+        <link rel="stylesheet" href="/static/style.css"> 
+    </head>
+    <body>
+        <h1>Headline Berita Terkini</h1>
+        <div class="news">
+            <div class="news-column">
+                {% for key, item in news_list[:3] %}
+                <div class="news-item">
+                    <label>{{ key|capitalize }}:</label>
+                    <p>
+                        <a href="{{ item.url }}" target="_blank" style="color: white; text-decoration: none;">
+                            {{ item.title }}
+                        </a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="news-column">
+                {% for key, item in news_list[3:] %}
+                <div class="news-item">
+                    <label>{{ key|capitalize }}:</label>
+                    <p>
+                        <a href="{{ item.url }}" target="_blank" style="color: white; text-decoration: none;">
+                            {{ item.title }}
+                        </a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </body>
 </html>
+

@@ -43,9 +43,11 @@ def news_scrap(name, url):
     headline = element.find(element_name, class_=class_name)
     
     if headline:
-        return headline.text.strip()
+        headline_text = headline.text.strip()
+        headline_url = headline.find_parent("a")["href"] if headline.find_parent("a") else url
+        return {"title": headline_text, "url": headline_url}
     else:
-        return f"Tidak dapat menemukan headline untuk {name}"
+        return {"title": f"Tidak dapat menemukan headline untuk {name}", "url": url}
     
 # def product_scrap(url, container_class, title_class, price_class, image_class):
 #     headers = {
@@ -74,14 +76,29 @@ def news_scrap(name, url):
 
 @app.route('/')
 def main():
-    cnn = news_scrap("cnn", "https://www.cnnindonesia.com")
-    detik = news_scrap("detik", "https://www.detik.com")
-    okezone = news_scrap("okezone", "https://www.okezone.com")
-    kompas = news_scrap("kompas", "https://www.kompas.com")
-    tempo = news_scrap("tempo", "https://www.tempo.co")
-    liputan6 = news_scrap("liputan6", "https://www.liputan6.com")
+    sources = {
+        "cnn": "https://www.cnnindonesia.com",
+        "detik": "https://www.detik.com",
+        "okezone": "https://www.okezone.com",
+        "kompas": "https://www.kompas.com",
+        "tempo": "https://www.tempo.co",
+        "liputan6": "https://www.liputan6.com"
+    }
     
-    return render_template('index.html', news1=cnn, news2=detik, news3=okezone, news4=kompas, news5=tempo, news6=liputan6)
+    news = {key: news_scrap(key, url) for key, url in sources.items()}
+    
+    news_list = list(news.items())
+    
+    return render_template('index.html', news_list=news_list)
+    
+    # cnn = news_scrap("cnn", "https://www.cnnindonesia.com")
+    # detik = news_scrap("detik", "https://www.detik.com")
+    # okezone = news_scrap("okezone", "https://www.okezone.com")
+    # kompas = news_scrap("kompas", "https://www.kompas.com")
+    # tempo = news_scrap("tempo", "https://www.tempo.co")
+    # liputan6 = news_scrap("liputan6", "https://www.liputan6.com")
+    
+    # return render_template('index.html', news1=cnn, news2=detik, news3=okezone, news4=kompas, news5=tempo, news6=liputan6)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
